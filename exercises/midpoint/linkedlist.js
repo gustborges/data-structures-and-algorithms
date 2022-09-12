@@ -166,6 +166,17 @@ class LinkedList {
     }
   }
 
+  // from this video https://www.youtube.com/watch?v=IJDJ0kBx2LM (1h10)
+  reverseList(node) {
+    if (node == null || node.next == null) {
+      return node;
+    }
+    let newHead = reverseList(node.next);
+    node.next.next = node;
+    node.next = null;
+    return newHead;
+  }
+
   *[Symbol.iterator]() {
     let node = this.head;
     while (node) {
