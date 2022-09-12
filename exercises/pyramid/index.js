@@ -14,6 +14,47 @@
 //       ' ### '
 //       '#####'
 
-function pyramid(n) {}
+// SOLUTION 1: iterate
+
+// const pyramid = (n) => {
+//   const totalCols = n * 2 - 1;
+//   const midpoint = Math.floor(totalCols / 2);
+
+//   for (let row = 0; row < n; row++) {
+//     let str = "";
+
+//     for (let col = 0; col < totalCols; col++) {
+//       if (midpoint - row <= col && midpoint + row >= col) {
+//         str += "#";
+//       } else {
+//         str += " ";
+//       }
+//     }
+//     console.log(str);
+//   }
+// };
+
+// SOLUTION 2: recursion
+
+const pyramid = (n, row = 0, str = "") => {
+  const cols = n * 2 - 1;
+  const midpoint = Math.floor(cols / 2);
+
+  if (row === n) {
+    return;
+  }
+
+  if (str.length === cols) {
+    console.log(str);
+    return pyramid(n, row + 1);
+  }
+
+  if (str.length <= midpoint + row && str.length >= midpoint - row) {
+    str += "#";
+  } else {
+    str += " ";
+  }
+  pyramid(n, row, str);
+};
 
 module.exports = pyramid;

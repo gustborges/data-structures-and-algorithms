@@ -8,6 +8,55 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {}
+// SOLUTION 1: Iteration (O(n))
+
+// function fib(n) {
+//   let fib = [0, 1];
+
+//   for (let i = 2; i <= n; i++) {
+//     newFib = fib[fib.length - 1] + fib[fib.length - 2];
+//     fib.push(newFib);
+//   }
+
+//   return fib[fib.length - 1];
+// }
+
+// SOLUTION 2: Recursion - terrible performance (exponential runtime complexity = O(2ˆn))
+
+// function slowFib(n) {
+//   if (n < 2) {
+//     return n;
+//   }
+
+//   return fib(n - 1) + fib(n - 2);
+// }
+
+// SOLUTION 3: Recursion w/ memoization
+// Reutilizes each fib(x) used so it doesn't need to calculate again
+
+const memoize = (fn) => {
+  const cache = {};
+
+  return (...args) => {
+    if (cache[args]) {
+      return cache[args];
+    }
+
+    const result = fn(...args);
+    cache[args] = result;
+
+    return result;
+  };
+};
+
+function slowFib(n) {
+  if (n < 2) {
+    return n;
+  }
+
+  return fib(n - 1) + fib(n - 2);
+}
+
+const fib = memoize(slowFib);
 
 module.exports = fib;
